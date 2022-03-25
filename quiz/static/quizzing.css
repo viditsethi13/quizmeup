@@ -1,0 +1,7 @@
+h1,h4{
+	color: green;
+}
+input:active{
+	background-color: green;
+	border-color: green;
+}

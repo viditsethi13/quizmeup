@@ -1,0 +1,81 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}
+	
+	{{message.title}}
+
+{% endblock title%}
+
+{% block content %}
+	
+	<div class="container">
+		<div class="m-3">
+			<h3>{{ question.question_text }} </h3>
+			<div class="form-group">
+				<label id="1" role="alert">
+					{{question.choice1}}
+				</label>
+			</div>
+			<div class="form-group">
+				<label id="2" role="alert">
+					{{question.choice2}}
+				</label>
+			</div>
+			<div class="form-group">
+				<label id="3" role="alert">
+					{{question.choice3}}
+				</label>
+			</div>
+			<div class="form-group">
+				<label id="4" role="alert">
+					{{question.choice4}}
+				</label>
+			</div>
+		</div>
+		<br>
+		<br>
+		
+		<div class="m-3">
+			<h3> {{message.message}} </h3>
+			<br>
+			<h5>You will be redirected in <span id="time">5</span> Seconds</h5>
+			<span>or click <a id="continue" href="/quizzing"> here</a> to continue</span>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		function startTimer(duration, display) {
+		    var timer = duration, minutes, seconds;
+		    setInterval(function () {
+		        seconds = parseInt(timer % 60, 10);
+		        display.textContent = seconds;
+
+		        if (--timer < 0) {
+		            timer = duration;
+		        }
+		    }, 1000);
+		}
+
+		window.onload = function () {
+		    var fiveSeconds = 4;
+		    var display = document.querySelector('#time');
+
+		    var yourOptionValue = "{{ans}}";
+		    console.log(yourOptionValue);
+		    var correctOptionValue = "{{question.answer}}";
+		    
+		    if(yourOptionValue != correctOptionValue){
+		    	if(yourOptionValue!='5'){
+		    		var yourOption = document.getElementById(yourOptionValue);
+		    		yourOption.classList.add("alert-danger");
+		    	}
+		    }
+		    var correctOption = document.getElementById(correctOptionValue);
+		    correctOption.classList.add("alert-success");
+
+		    startTimer(fiveSeconds, display);
+		    window.setTimeout(function() { document.getElementById('continue').click();; }, 5000);
+		};
+	</script>
+
+{% endblock content%}

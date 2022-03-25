@@ -1,0 +1,60 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}
+	Page Not Found
+{% endblock title%}
+
+{% block content %}
+	
+	<div class="container m-5">
+		<h3>The page you are looking for is not available </h3>
+		<br>
+		<p>You will be redirected to Home Page in <span id="time">3 </span> seconds</p>
+
+		<form role="role" name="f1" action="/">
+		</form>
+
+		<script type="text/javascript">
+			function startTimer(duration, display) {
+			    var timer = duration, minutes, seconds;
+			    setInterval(function () {
+			        seconds = parseInt(timer % 60, 10);
+			        display.textContent = seconds;
+
+			        if (--timer < 0) {
+			            timer = duration;
+			        }
+			    }, 1000);
+			}
+
+			window.onload = function () {
+			    var threeSeconds = 2,
+			        display = document.querySelector('#time');
+			    startTimer(threeSeconds, display);
+			    window.setTimeout(function() { document.f1.submit(); }, 3000);
+			};
+		</script>
+	</div>
+
+{% endblock content%}
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+</head>
+<body>
+	
+</body>
+
+</html>

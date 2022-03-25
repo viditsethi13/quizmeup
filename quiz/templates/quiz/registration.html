@@ -1,0 +1,75 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}
+	Sign Up - Page to create your account
+{% endblock title%}
+
+{% block content %}
+	
+	<div class="row m-5">
+
+		<div class="col-4">
+		</div>
+
+		<div class="col-4 p-3 border rounded border-3">
+			<h2>
+				<p> Create Your Account </p>
+			</h2>
+			<div>
+				{% for message in messages %}
+					<p> {{ message }} </p>
+				{% endfor %}
+			</div>
+
+			<form name="f1" method="POST" action="registration" role="form">
+				{% csrf_token %}
+				<div class="form-group">
+					<input type="text" placeholder="First Name" name="first_name" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="text" placeholder="Last Name"name="last_name" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="email" placeholder="Email Id" name="email" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="text" placeholder="UserName" name="username" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password1" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="password" placeholder="Confirm Password" name="password2" class="form-control" required>
+				</div>
+				<br>
+				<br>
+				<div class="form-group">
+					<center>
+						<button class="btn btn-primary" name="submit">
+							<b>Register</b>
+						</button>
+					</center>
+				</div>
+			</form>
+			<br>
+			<br>
+			<div class="form-group">
+				<center>
+						<p>
+							Have an Account? <a href="/login"> Sign In </a>
+						</p>
+				</center>
+			</div>
+		</div>
+		
+		<div class="col-4">
+		</div>
+
+	</div>
+
+{% endblock content%}

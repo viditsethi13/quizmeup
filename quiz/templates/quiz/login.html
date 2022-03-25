@@ -1,0 +1,60 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}
+	Sign In - Enter your username and password to Sign in to your account
+{% endblock title%}
+
+{% block content %}
+	
+	<div class="row m-5">
+		<div class="col-4">
+		</div>
+
+		<div class="col-4 p-3 border rounded border-3">
+			<h2>
+				<p> Sign In to Your Account </p>
+			</h2>
+
+			<div>
+				{% for message in messages %}
+					<center>
+						<p> {{ message }} </p>
+					</center>
+				{% endfor %}
+			</div>
+			
+			<form name="f1" method="POST" action=" " role="form" style="margin-bottom: 30px">
+				{% csrf_token %}
+				<br>
+				<div class="form-group">
+					<input type="text" placeholder="Username" name="username" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<center>
+						<button class="btn btn-primary" name="Sign in">
+							<b>Sign In</b>
+						</button>
+					</center>
+				</div>
+			</form>
+			<br>
+			<div class="form-group">
+				<center>
+					<p>
+						Need an Account? <a href="/registration"> Sign Up </a>
+					</p>
+				</center>
+			</div>
+
+		</div>
+		
+		<div class="col-4">
+		</div>
+	</div>
+
+{% endblock content%}
