@@ -27,7 +27,7 @@ def login(request):
 			user=user_detail.objects.get(username=username)
 			return redirect('home')
 		else:
-			messages.info(request,'Incorrect username or password')
+			messages.info(request,'The credentials you entered are incorrect.')
 			return redirect('login')
 	else:
 		if request.user.is_authenticated:
@@ -56,13 +56,13 @@ def registration(request):
 					us.save()
 					return redirect("login")
 				else:
-					messages.info(request,'Email is not Unique\nTry Again')
+					messages.info(request,'The email you entered is not unique.\nTry Again')
 					return redirect("registration")
 			else:
-				messages.info(request,'Username is not Unique\nTry Again')
+				messages.info(request,'The username you entered is not unique.\nTry Again')
 				return redirect("registration")
 		else:
-			messages.info(request,'Password is not Same\nTry Again')
+			messages.info(request,'The passwords you entered are not same.\nTry Again')
 			return redirect("registration")
 	else:
 		return render(request,'quiz/registration.html')
