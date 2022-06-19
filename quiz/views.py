@@ -94,6 +94,7 @@ def quizzing(request):
 			u.t3=u.t2
 			u.t2=u.t1
 			u.t1=c
+			u.total_score=u.total_score+c
 			u.save()
 			c=0
 			return render(request,'quiz/home.html',{'user':u})
