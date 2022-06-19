@@ -53,26 +53,26 @@
 					<form role="role" name="f1" action="quizzing" method="POST">
 						{% csrf_token %}
 						<div class="form-group">
-							<input type="radio" name="choice" value="1" required>
-							<label>
+							<input type="radio" name="choice" value="1" id="1" required>
+							<label onclick="radioButtonClicked(1)">
 								{{question.choice1}}
 							</label>
 						</div>
 						<div class="form-group">
-							<input type="radio" name="choice" value="2">
-							<label>
+							<input type="radio" name="choice" value="2" id="2">
+							<label onclick="radioButtonClicked(2)">
 								{{question.choice2}}
 							</label>
 						</div>
 						<div class="form-group">
-							<input type="radio" name="choice" value="3">
-							<label>
+							<input type="radio" name="choice" value="3" id="3">
+							<label onclick="radioButtonClicked(3)">
 								{{question.choice3}}
 							</label>
 						</div>
 						<div class="form-group">
-							<input type="radio" name="choice" value="4">
-							<label>
+							<input type="radio" name="choice" value="4" id="4">
+							<label onclick="radioButtonClicked(4)">
 								{{question.choice4}}
 							</label>
 						</div>
@@ -118,5 +118,18 @@
 		    startTimer(sixtySeconds, display);
 		    window.setTimeout(function() { document.f2.submit(); }, 60000);
 		};
+
+		function radioButtonClicked(id){
+			var radio  = document.getElementById(id);
+			if(radio.checked){
+				// uncheck it
+				radio.checked = false;
+			}
+			else{
+				// check it
+				radio.checked = true;
+			}
+			console.log(radio);
+		}
 	</script>
 </html>
