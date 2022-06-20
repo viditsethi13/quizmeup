@@ -19,33 +19,33 @@
 					<br>
 					<form name="f1" method="POST" action="exam" role="form">
 					{% csrf_token %}
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="type" id="database" value="database" required checked>
-						  <label class="form-check-label" onclick="radioButtonClicked('database')">
-						    Database
-						  </label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="type" id="algorithms" value="algorithm">
-					  	<label class="form-check-label" onclick="radioButtonClicked('algorithms')">
-					    	Algorithms
-					  	</label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="type" id="java" value="java">
-					  	<label class="form-check-label" onclick="radioButtonClicked('java')">
-					    	Java
-					  	</label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="type" id="python" value="python">
-					  	<label class="form-check-label" onclick="radioButtonClicked('python')">
-					    	Python
-					  	</label>
-					</div>
+						<div class="form-check">
+						<input class="form-check-input" type="radio" name="type" id="database" value="database" required checked>
+							<label class="form-check-label" onclick="radioButtonClicked('database')">
+								Database
+							</label>
+						</div>
+						<div class="form-check">
+						<input class="form-check-input" type="radio" name="type" id="algorithms" value="algorithm">
+							<label class="form-check-label" onclick="radioButtonClicked('algorithms')">
+								Algorithms
+							</label>
+						</div>
+						<div class="form-check">
+						<input class="form-check-input" type="radio" name="type" id="java" value="java">
+							<label class="form-check-label" onclick="radioButtonClicked('java')">
+								Java
+							</label>
+						</div>
+						<div class="form-check">
+						<input class="form-check-input" type="radio" name="type" id="python" value="python">
+							<label class="form-check-label" onclick="radioButtonClicked('python')">
+								Python
+							</label>
+						</div>
 
-					<br>
-					<br>
+						<br>
+						<br>
 					
 						<center>
 							<button class="btn btn-primary" name="start_test">
@@ -76,6 +76,15 @@
 				  	</tr>
 				</tbody>
 			</table>
+			<br>
+			<br>
+			<form name="f2" method="GET" action="details" role="form">
+				<center>
+					<button class="btn btn-primary" name="view_details">
+						<b>View Details</b>
+					</button>
+				</center>
+			</form>
 		</div>
 
 	</div>
