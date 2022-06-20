@@ -171,3 +171,11 @@ def contact(request):
 
 def about(request):
 	return render(request,'quiz/about.html')
+
+def details(request):
+	if request.user.is_authenticated:
+		username=request.user.username
+		user=user_detail.objects.get(username=username)
+		return render(request,'quiz/details.html',{'user':user})
+	else:
+		return redirect('/login')
