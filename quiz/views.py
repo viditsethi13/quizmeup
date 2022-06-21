@@ -187,6 +187,7 @@ def details(request):
 	if request.user.is_authenticated:
 		username=request.user.username
 		user=user_detail.objects.get(username=username)
-		return render(request,'quiz/details.html',{'user':user})
+		t_n=test_number.objects.get(user=user)
+		return render(request,'quiz/details.html',{'user':user,'test_number':t_n})
 	else:
 		return redirect('/login')
