@@ -8,14 +8,35 @@
     <div class="row m-5">
                         
         <div class="col-md-5 border border-3 rounded p-4">
+            <center>
+                <h3> <span> Number of Quiz Taken</span> </h3>
+            </center>
             <div class="row">
                 <div class="col-3">
                 </div>
                 <div class="col-6">
-                    <center>
-                        <h3> <span> Quiz Topics</span> </h3>
-                    </center>
+                    
                     <br>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Algorithm</th>
+                                <td class="text-end">{{ test_number.algorithm }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Databases</th>
+                                <td class="text-end">{{ test_number.database }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Java</th>
+                                <td class="text-end">{{ test_number.java }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Python</th>
+                                <td class="text-end">{{ test_number.python }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-3">	
                 </div>
@@ -46,6 +67,14 @@
                 </tbody>
             </table>
         </div>
-
+        <br>
+        <br>
+        <form name="f1" method="GET" action="home" role="form">
+            <center>
+                <button class="btn btn-primary" role="submit">
+                    <b>Home</b>
+                </button>
+            </center>
+        </form>
     </div>
 {% endblock content%}
