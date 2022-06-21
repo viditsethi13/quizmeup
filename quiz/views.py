@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-from .models import question_database,user_detail,temparory,question_java,question_algorithm,question_python
+from .models import question_database,user_detail,temparory,question_java,question_algorithm,question_python,test_number
 
 from random import shuffle
 
@@ -22,8 +22,12 @@ def login(request):
 			if user_detail.objects.filter(username=username).exists():
 				pass
 			else:
-				us=user_detail(username=username,no_of_test=0,total_score=0,t1=0,t2=0,t3=0)
+				us=user_detail(username=username,last_score=0)
 				us.save()
+				t_n=test_number(0,0,0,0)
+				us=user_detail.objects.get(username=username)
+				t_n.user=us
+				t_n.save()
 			user=user_detail.objects.get(username=username)
 			return redirect('home')
 		else:
@@ -31,6 +35,7 @@ def login(request):
 			return redirect('login')
 	else:
 		if request.user.is_authenticated:
+			print("user:",request.user.username)
 			user=user_detail.objects.get(username=request.user.username)
 			return render(request,'quiz/home.html',{'user':user})
 		else:
@@ -52,14 +57,18 @@ def registration(request):
 					user.save()
 					messages.info(request,'Registration of user done.')
 					u=User.objects.get(username=username).id
-					us=user_detail(id=int(u),username=username,no_of_test=0,total_score=0,t1=0,t2=0,t3=0)
+					us=user_detail(id=int(u),username=username,last_score=0)
 					us.save()
+					t_n=test_number(0,0,0,0)
+					us=user_detail.objects.get(username=username)
+					t_n.user=us
+					t_n.save()
 					return redirect("login")
 				else:
 					messages.info(request,'The email you entered is not unique.\nTry Again')
 					return redirect("registration")
 			else:
-				messages.info(request,'The username you entered is not unique.\nTry Again')
+				messages.info(request,'The username you entered is already being used.\nTry Again')
 				return redirect("registration")
 		else:
 			messages.info(request,'The passwords you entered are not same.\nTry Again')
@@ -90,11 +99,7 @@ def quizzing(request):
 		else:
 			username=request.user.username
 			u=user_detail.objects.get(username=username)
-			u.no_of_test=u.no_of_test+1
-			u.t3=u.t2
-			u.t2=u.t1
-			u.t1=c
-			u.total_score=u.total_score+c
+			u.last_score=c
 			u.save()
 			c=0
 			return render(request,'quiz/home.html',{'user':u})
@@ -130,17 +135,23 @@ def quizzing(request):
 
 def exam(request):
 	if request.method=='POST':
+		us=user_detail.objects.get(username=request.user)
+		t_n=test_number.objects.get(user=us)
 		test_type = request.POST.get("type")
 		temparory.objects.all().delete()
 		if test_type == 'database':
+			t_n.database+=1
 			q=question_database.objects.all()
 		elif test_type == 'java':
+			t_n.java+=1
 			q=question_java.objects.all()
 		elif test_type == 'python':
+			t_n.python+=1
 			q=question_python.objects.all()
 		else:
+			t_n.algorithm+=1
 			q=question_algorithm.objects.all()
-
+		t_n.save()
 		q=list(q)
 		shuffle(q)
 		q=q[:5]
