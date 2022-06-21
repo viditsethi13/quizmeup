@@ -8,4 +8,4 @@ admin.site.register(temparory)
 admin.site.register(question_java)
 admin.site.register(question_python)
 admin.site.register(question_algorithm)
-
+admin.site.register(test_number)
