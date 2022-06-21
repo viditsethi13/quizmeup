@@ -5,13 +5,18 @@ from django.contrib.auth.models import User,auth
 
 class user_detail(models.Model):
 	username=models.CharField(max_length=150)
-	no_of_test=models.IntegerField()
-	total_score=models.IntegerField()
-	t1=models.IntegerField()
-	t2=models.IntegerField()
-	t3=models.IntegerField()
+	last_score=models.IntegerField(default=0)
 	def __str__(self):
 		return self.username
+
+class test_number(models.Model):
+	algorithm=models.IntegerField(default=0)
+	database=models.IntegerField(default=0)
+	java=models.IntegerField(default=0)
+	python=models.IntegerField(default=0)
+	user=models.ForeignKey(user_detail,on_delete=models.CASCADE,default=None)
+	def __str__(self):
+		return self.user.username
 
 class question_database(models.Model):
 	question_text=models.CharField(max_length=500)
