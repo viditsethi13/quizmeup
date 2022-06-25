@@ -18,6 +18,19 @@ class test_number(models.Model):
 	def __str__(self):
 		return self.user.username
 
+class test_detail(models.Model):
+	ALGORITHM='AL'
+	DATABASE='DB'
+	JAVA='JA'
+	PYTHON='PY'
+	TOPIC_CHOICES = [(ALGORITHM, 'Algorithm'),(DATABASE, 'Database'),(JAVA, 'Java'),(PYTHON, 'Python')]
+	topic = models.CharField(max_length=2,choices=TOPIC_CHOICES,default=DATABASE,)
+	date=models.DateTimeField()
+	score=models.IntegerField(default=0)
+	user=models.ForeignKey(user_detail,on_delete=models.CASCADE,default=None)
+	def __str__(self):
+		return self.user.username+str(self.date)
+
 class question_database(models.Model):
 	question_text=models.CharField(max_length=500)
 	choice1=models.CharField(max_length=200)
