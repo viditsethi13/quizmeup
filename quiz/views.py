@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-from .models import question_database,user_detail,temparory,question_java,question_algorithm,question_python,test_number
-
+from .models import question_database,temparory,question_java,question_algorithm,question_python
+from .models import test_number,test_detail,user_detail
 from random import shuffle
+import datetime
 
 # Create your views here.
 c=0
+top=''
 def index(request):
 	return render(request,'quiz/index.html')
 
@@ -80,7 +82,8 @@ def home(request):
 	if request.user.is_authenticated:
 		username=request.user.username
 		user=user_detail.objects.get(username=username)
-		return render(request,'quiz/home.html',{'user':user})
+		number = test_detail.objects.all().filter(user=user).count()
+		return render(request,'quiz/home.html',{'user':user,'number':number})
 	else:
 		return redirect('/login')
 
@@ -92,6 +95,7 @@ def logout(request):
 def quizzing(request):
 	if request.method=='GET':
 		global c
+		global top
 		number = temparory.objects.all().count()
 		q=temparory.objects.all().first()
 		if q:
@@ -99,10 +103,14 @@ def quizzing(request):
 		else:
 			username=request.user.username
 			u=user_detail.objects.get(username=username)
+			t_d=test_detail(topic=top,date=datetime.datetime.now(),score=c,user=u)
+			t_d.save()
 			u.last_score=c
 			u.save()
 			c=0
-			return render(request,'quiz/home.html',{'user':u})
+			top=''
+			number = test_detail.objects.all().filter(user=u).count()
+			return render(request,'quiz/home.html',{'user':u,'number':number})
 	elif request.method=='POST':
 		ans=int(request.POST['choice'])
 		q=request.POST['question']
@@ -139,17 +147,22 @@ def exam(request):
 		t_n=test_number.objects.get(user=us)
 		test_type = request.POST.get("type")
 		temparory.objects.all().delete()
+		global top
 		if test_type == 'database':
 			t_n.database+=1
+			top='DB'
 			q=question_database.objects.all()
 		elif test_type == 'java':
 			t_n.java+=1
+			top='JA'
 			q=question_java.objects.all()
 		elif test_type == 'python':
 			t_n.python+=1
+			top='PY'
 			q=question_python.objects.all()
 		else:
 			t_n.algorithm+=1
+			top='AL'
 			q=question_algorithm.objects.all()
 		t_n.save()
 		q=list(q)
@@ -188,6 +201,7 @@ def details(request):
 		username=request.user.username
 		user=user_detail.objects.get(username=username)
 		t_n=test_number.objects.get(user=user)
-		return render(request,'quiz/details.html',{'user':user,'test_number':t_n})
+		t_d=test_detail.objects.all().filter(user=user)
+		return render(request,'quiz/details.html',{'user':user,'test_number':t_n,'test_detail':t_d})
 	else:
 		return redirect('/login')
