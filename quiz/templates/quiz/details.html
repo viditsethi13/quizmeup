@@ -43,29 +43,28 @@
             </div>
         </div>
 
-        <div class="col-md-5 offset-md-2 border border-3 rounded p-4">
+        <div class="col-md-5 offset-md-2 border border-3 rounded p-4" style="max-height: 330px;">
             <center>
                 <h3 class="mb-4"> <span> All Test Scores</span> </h3>
             </center>
-            <table class="table">
-                <thead>
-                    <th>Date</th>
-                    <th>Topic</th>
-                    <th>Score</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-end"></td>
-                        <td class="text-end"></td>
-                        <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                        <td class="text-end"></td>
-                        <td class="text-end"></td>
-                        <td class="text-end"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="overflow-y: scroll;max-height: 242px;">
+                <table class="table">
+                    <thead>
+                        <th>Date</th>
+                        <th>Topic</th>
+                        <th>Score</th>
+                    </thead>
+                    <tbody>
+                        {% for test in test_detail %}
+                            <tr>
+                                <td>{{ test.date }}</td>
+                                <td>{{ test.get_topic_display }}</td>
+                                <td>{{ test.score }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <br>
         <br>
