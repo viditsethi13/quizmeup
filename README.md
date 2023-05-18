@@ -27,7 +27,24 @@
 
 
 <h2> Screenshots </h2>
-
+  Home
+  <img src="Screenshots/Home.jpg" width=1000/>
+  Sign In
+  <img src="Screenshots/Sign_In.jpg" width=1000/>
+  Sign Up
+  <img src="Screenshots/Sign_Up.jpg" width=1000/>
+  About
+  <img src="Screenshots/about.jpg" width=1000/>
+  Contact
+  <img src="Screenshots/Contact.jpg" width=1000/>
+  Account Home
+  <img src="Screenshots/Account_Home.jpg" width=1000/>
+  Question
+  <img src="Screenshots/Quiz_Question.jpg" width=1000/>
+  Solution
+  <img src="Screenshots/Quiz_Answer.jpg" width=1000/>
+  Stats
+  <img src="Screenshots/Quiz_Details.jpg" width=1000/>
 
 <h2> Architecture </h2>
   <p> This Django project follows the Model-View-Template (MVT) architectural pattern. The components are organized as follows:</p>
